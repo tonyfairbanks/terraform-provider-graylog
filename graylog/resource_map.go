@@ -3,33 +3,33 @@ package graylog
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/dashboard"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/dashboard/position"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/dashboard/widget"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/event/definition"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/event/notification"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/role"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/sidecar"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/sidecar/collector"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/sidecar/configuration"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/stream"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/stream/alarmcallback"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/stream/alert/condition"
-	streamOutput "github.com/zahiar/terraform-provider-graylog/graylog/resource/stream/output"
-	streamRule "github.com/zahiar/terraform-provider-graylog/graylog/resource/stream/rule"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/grok"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/indices/indexset"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/input"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/input/extractor"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/input/staticfield"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/ldap/setting"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/output"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/pipeline/connection"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/pipeline/pipeline"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/system/pipeline/rule"
-	"github.com/zahiar/terraform-provider-graylog/graylog/resource/user"
-	userToken "github.com/zahiar/terraform-provider-graylog/graylog/resource/user/token"
-	authzSharesEntities "github.com/zahiar/terraform-provider-graylog/graylog/resource/authz/shares/entities"
+	authzSharesEntities "github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/authz/shares/entities"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/dashboard"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/dashboard/position"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/dashboard/widget"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/event/definition"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/event/notification"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/role"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/sidecar"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/sidecar/collector"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/sidecar/configuration"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/stream"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/stream/alarmcallback"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/stream/alert/condition"
+	streamOutput "github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/stream/output"
+	streamRule "github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/stream/rule"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/grok"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/indices/indexset"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/input"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/input/extractor"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/input/staticfield"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/ldap/setting"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/output"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/pipeline/connection"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/pipeline/pipeline"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/system/pipeline/rule"
+	"github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/user"
+	userToken "github.com/tonyfairbanks/terraform-provider-graylog/graylog/resource/user/token"
 )
 
 var resourceMap = map[string]*schema.Resource{
@@ -59,7 +59,7 @@ var resourceMap = map[string]*schema.Resource{
 	"graylog_stream_rule":                streamRule.Resource(),
 	"graylog_user":                       user.Resource(),
 	"graylog_user_token":                 userToken.Resource(),
-	"graylog_share_entity":								authzSharesEntities.Resource(),
+	"graylog_share_entity":               authzSharesEntities.Resource(),
 	// TODO support view
 	// "graylog_view":                       view.Resource(),
 }
