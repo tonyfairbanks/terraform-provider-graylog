@@ -19,12 +19,13 @@ const (
 	keyType            = "type"
 )
 
+// to graylog from tf
 func getDataFromResourceData(d *schema.ResourceData) (map[string]interface{}, error) {
 	data, err := convert.GetFromResourceData(d, Resource())
 	if err != nil {
 		return nil, err
 	}
-	util.RenameKey(data, "cursor_strategy", "cut_or_copy")
+	// util.RenameKey(data, "cursor_strategy", "cut_or_copy")
 	util.RenameKey(data, "type", "extractor_type")
 	util.SetDefaultValue(data, "target_field", "")
 	util.SetDefaultValue(data, "condition_value", "")
@@ -34,18 +35,21 @@ func getDataFromResourceData(d *schema.ResourceData) (map[string]interface{}, er
 	}
 	util.RenameKey(data, keyExtractorID, keyID)
 
-	converters := convert.ListToMap(data[keyConverters].([]interface{}), keyType)
+	//This is probably wrong but it works for extractors that don't spec converters
+	//TODO: FIXME!
+	converters := data[keyConverters].([]interface{})
 	for k, v := range converters {
 		converters[k] = v.(map[string]interface{})[keyConfig]
 	}
-	if err := convert.JSONToData(converters); err != nil {
-		return nil, err
-	}
+	// if err := convert.JSONToData(converters); err != nil {
+	// 	return nil, err
+	// }
 	data[keyConverters] = converters
 
 	return data, nil
 }
 
+// from graylog to tf
 func setDataToResourceData(d *schema.ResourceData, data map[string]interface{}) error {
 	if err := convert.DataToJSON(data, keyExtractorConfig); err != nil {
 		return err

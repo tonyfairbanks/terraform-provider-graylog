@@ -30,7 +30,7 @@ func Resource() *schema.Resource {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"type": {
+			"extractor_type": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
