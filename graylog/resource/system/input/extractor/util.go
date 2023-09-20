@@ -26,7 +26,7 @@ func getDataFromResourceData(d *schema.ResourceData) (map[string]interface{}, er
 		return nil, err
 	}
 	// util.RenameKey(data, "cursor_strategy", "cut_or_copy")
-	util.RenameKey(data, "type", "extractor_type")
+	// util.RenameKey(data, "type", "extractor_type")
 	util.SetDefaultValue(data, "target_field", "")
 	util.SetDefaultValue(data, "condition_value", "")
 
