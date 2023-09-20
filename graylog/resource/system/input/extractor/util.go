@@ -24,8 +24,6 @@ func getDataFromResourceData(d *schema.ResourceData) (map[string]interface{}, er
 	if err != nil {
 		return nil, err
 	}
-	util.RenameKey(data, "cursor_strategy", "cut_or_copy")
-	util.RenameKey(data, "type", "extractor_type")
 	util.SetDefaultValue(data, "target_field", "")
 	util.SetDefaultValue(data, "condition_value", "")
 
@@ -34,13 +32,16 @@ func getDataFromResourceData(d *schema.ResourceData) (map[string]interface{}, er
 	}
 	util.RenameKey(data, keyExtractorID, keyID)
 
-	converters := convert.ListToMap(data[keyConverters].([]interface{}), keyType)
-	for k, v := range converters {
-		converters[k] = v.(map[string]interface{})[keyConfig]
+	converters := data[keyConverters].([]interface{})
+	for i, a := range converters {
+		elem := a.(map[string]interface{})
+		err = convert.JSONToData(elem, keyConfig)
+		if err != nil {
+			return nil, err
+		}
+		converters[i] = elem
 	}
-	if err := convert.JSONToData(converters); err != nil {
-		return nil, err
-	}
+
 	data[keyConverters] = converters
 
 	return data, nil
