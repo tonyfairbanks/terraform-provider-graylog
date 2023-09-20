@@ -19,14 +19,11 @@ const (
 	keyType            = "type"
 )
 
-// to graylog from tf
 func getDataFromResourceData(d *schema.ResourceData) (map[string]interface{}, error) {
 	data, err := convert.GetFromResourceData(d, Resource())
 	if err != nil {
 		return nil, err
 	}
-	// util.RenameKey(data, "cursor_strategy", "cut_or_copy")
-	// util.RenameKey(data, "type", "extractor_type")
 	util.SetDefaultValue(data, "target_field", "")
 	util.SetDefaultValue(data, "condition_value", "")
 
@@ -38,12 +35,10 @@ func getDataFromResourceData(d *schema.ResourceData) (map[string]interface{}, er
 	converters := data[keyConverters].([]interface{})
 	for i, a := range converters {
 		elem := a.(map[string]interface{})
-		//b, err := json.Marshal(elem[keyConfig])
 		err = convert.JSONToData(elem, keyConfig)
 		if err != nil {
 			return nil, err
 		}
-		//elem[keyConfig] = string(b)
 		converters[i] = elem
 	}
 
@@ -52,7 +47,6 @@ func getDataFromResourceData(d *schema.ResourceData) (map[string]interface{}, er
 	return data, nil
 }
 
-// from graylog to tf
 func setDataToResourceData(d *schema.ResourceData, data map[string]interface{}) error {
 	if err := convert.DataToJSON(data, keyExtractorConfig); err != nil {
 		return err
