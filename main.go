@@ -16,10 +16,13 @@ func main() {
 	flag.BoolVar(&debug, "debug", false, "set to true to run the provider with support for debuggers like delve")
 	flag.Parse()
 
-	plugin.Serve(&plugin.ServeOpts{
+	opts := &plugin.ServeOpts{
+		Debug:        debug,
+		ProviderAddr: "registry.terraform.io/tonyfairbanks/graylog",
 		ProviderFunc: func() *schema.Provider {
 			return graylog.Provider()
 		},
-		Debug: debug,
-	})
+	}
+
+	plugin.Serve(opts)
 }

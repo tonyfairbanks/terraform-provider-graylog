@@ -35,15 +35,18 @@ func getDataFromResourceData(d *schema.ResourceData) (map[string]interface{}, er
 	}
 	util.RenameKey(data, keyExtractorID, keyID)
 
-	//This is probably wrong but it works for extractors that don't spec converters
-	//TODO: FIXME!
 	converters := data[keyConverters].([]interface{})
-	for k, v := range converters {
-		converters[k] = v.(map[string]interface{})[keyConfig]
+	for i, a := range converters {
+		elem := a.(map[string]interface{})
+		//b, err := json.Marshal(elem[keyConfig])
+		err = convert.JSONToData(elem, keyConfig)
+		if err != nil {
+			return nil, err
+		}
+		//elem[keyConfig] = string(b)
+		converters[i] = elem
 	}
-	// if err := convert.JSONToData(converters); err != nil {
-	// 	return nil, err
-	// }
+
 	data[keyConverters] = converters
 
 	return data, nil
